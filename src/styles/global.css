@@ -147,58 +147,56 @@
 
   /* ════════ BUTTONS ════════ */
   .btn {
-    position: relative;
     display: inline-flex; align-items: center; justify-content: center;
     gap: 0.5rem;
-    padding: 0.78rem 1.5rem;
-    border-radius: var(--radius-pill);
-    font-weight: 600; font-size: 0.92rem; letter-spacing: -0.005em;
+    padding: 0.8rem 1.4rem;
+    border-radius: 0.75rem;          /* 12px — crisp, architectural (no bubbly pill) */
+    font-weight: 600; font-size: 0.92rem; letter-spacing: -0.01em;
     line-height: 1; white-space: nowrap;
     border: 1px solid transparent; cursor: pointer;
-    transition: background 0.22s ease, color 0.22s ease, border-color 0.22s ease,
-                transform 0.22s ease, box-shadow 0.22s ease;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   }
-  .btn:active { transform: translateY(0) scale(0.98); }
-  .btn svg:last-child:not(:first-child) { transition: transform 0.22s ease; }
-  .btn:hover svg:last-child:not(:first-child) { transform: translateX(2px); }
+  .btn:active { transform: translateY(0) scale(0.985); }
+  .btn svg:last-child:not(:first-child) { transition: transform 0.2s ease; }
+  .btn:hover svg:last-child:not(:first-child) { transform: translateX(3px); }
 
-  /* RED — primary CTA (flat) */
-  .btn-primary { background: rgb(var(--rgb-orange)); color: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
-  .btn-primary:hover { background: rgb(var(--rgb-orange-deep)); transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgb(var(--rgb-orange) / 0.55); }
+  /* RED — primary. Flat at rest; refined lift + soft shadow on hover. */
+  .btn-primary { background: rgb(var(--rgb-orange)); color: #fff; }
+  .btn-primary:hover { background: rgb(var(--rgb-orange-deep)); transform: translateY(-2px); box-shadow: 0 12px 26px -12px rgb(var(--rgb-orange) / 0.7); }
 
-  /* CARBON — near-black (token: navy) */
-  .btn-navy { background: rgb(var(--rgb-navy)); color: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 0.12); }
-  .btn-navy:hover { background: rgb(var(--rgb-navy-600)); transform: translateY(-1px); box-shadow: 0 8px 20px -10px rgb(0 0 0 / 0.5); }
+  /* CARBON */
+  .btn-navy { background: rgb(var(--rgb-navy)); color: #fff; }
+  .btn-navy:hover { background: rgb(var(--rgb-navy-600)); transform: translateY(-2px); box-shadow: 0 12px 26px -14px rgb(0 0 0 / 0.6); }
 
-  /* OUTLINE — carbon outline on light surfaces */
-  .btn-outline { background: transparent; color: rgb(var(--rgb-navy)); border-color: rgb(var(--rgb-navy) / 0.22); }
-  .btn-outline:hover { background: rgb(var(--rgb-navy)); color: #fff; border-color: rgb(var(--rgb-navy)); transform: translateY(-1px); }
+  /* OUTLINE */
+  .btn-outline { background: transparent; color: rgb(var(--rgb-navy)); border-color: rgb(var(--rgb-navy) / 0.18); }
+  .btn-outline:hover { background: rgb(var(--rgb-navy)); color: #fff; border-color: rgb(var(--rgb-navy)); transform: translateY(-2px); }
 
-  /* LIGHT — crisp white (on dark/photo) */
-  .btn-light { background: #fff; color: rgb(var(--rgb-navy)); border-color: rgb(0 0 0 / 0.08); box-shadow: 0 1px 2px rgb(0 0 0 / 0.06); }
-  .btn-light:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -10px rgb(0 0 0 / 0.28); }
+  /* LIGHT */
+  .btn-light { background: #fff; color: rgb(var(--rgb-navy)); border-color: rgb(0 0 0 / 0.07); }
+  .btn-light:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -14px rgb(0 0 0 / 0.3); }
 
   /* GLASS — over photography */
   .btn-glass {
-    background: rgb(255 255 255 / 0.1); color: #fff; border: 1px solid rgb(255 255 255 / 0.28);
+    background: rgb(255 255 255 / 0.08); color: #fff; border-color: rgb(255 255 255 / 0.22);
     backdrop-filter: blur(14px) saturate(150%); -webkit-backdrop-filter: blur(14px) saturate(150%);
   }
-  .btn-glass:hover { background: rgb(255 255 255 / 0.18); border-color: rgb(255 255 255 / 0.45); transform: translateY(-1px); }
+  .btn-glass:hover { background: rgb(255 255 255 / 0.16); border-color: rgb(255 255 255 / 0.42); transform: translateY(-2px); }
 
   /* GHOST — subtle on dark */
-  .btn-ghost { background: rgb(255 255 255 / 0.06); color: #fff; border-color: rgb(255 255 255 / 0.2); }
-  .btn-ghost:hover { background: rgb(255 255 255 / 0.13); border-color: rgb(255 255 255 / 0.34); transform: translateY(-1px); }
+  .btn-ghost { background: rgb(255 255 255 / 0.05); color: #fff; border-color: rgb(255 255 255 / 0.18); }
+  .btn-ghost:hover { background: rgb(255 255 255 / 0.12); border-color: rgb(255 255 255 / 0.3); transform: translateY(-2px); }
 
-  /* GOLD — "This is Art" accent button */
-  .btn-gold { background: rgb(var(--rgb-gold)); color: #1A1A1A; box-shadow: 0 1px 2px rgb(0 0 0 / 0.1); }
-  .btn-gold:hover { background: #BE9D54; transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgb(201 169 97 / 0.5); }
+  /* GOLD — "This is Art" accent */
+  .btn-gold { background: rgb(var(--rgb-gold)); color: #1A1A1A; }
+  .btn-gold:hover { background: #BE9D54; transform: translateY(-2px); box-shadow: 0 12px 26px -12px rgb(201 169 97 / 0.55); }
 
   /* WHATSAPP */
-  .btn-whatsapp { background: #1FA968; color: #fff; box-shadow: 0 1px 2px rgb(0 0 0 / 0.1); }
-  .btn-whatsapp:hover { background: #1A9A5E; transform: translateY(-1px); box-shadow: 0 8px 20px -8px rgb(26 154 94 / 0.5); }
+  .btn-whatsapp { background: #1FA968; color: #fff; }
+  .btn-whatsapp:hover { background: #1A9A5E; transform: translateY(-2px); box-shadow: 0 12px 26px -12px rgb(26 154 94 / 0.6); }
 
-  .btn-sm { padding: 0.55rem 1.05rem; font-size: 0.83rem; }
-  .btn-lg { padding: 0.92rem 1.8rem; font-size: 0.97rem; }
+  .btn-sm { padding: 0.58rem 1rem; font-size: 0.84rem; border-radius: 0.625rem; }
+  .btn-lg { padding: 0.98rem 1.75rem; font-size: 0.98rem; border-radius: 0.85rem; }
   .btn-block { width: 100%; }
 
   /* ════════ PILLS / BADGES ════════ */
@@ -319,12 +317,17 @@
   .service-media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.4,0,0.2,1); }
   .service-card:hover .service-media img { transform: scale(1.06); }
   .service-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgb(8 8 8 / 0.05) 0%, transparent 35%, rgb(8 8 8 / 0.6) 100%); pointer-events: none; }
+  /* Icon chip lives in the content layer (NOT inside the overflow-hidden
+     media) so it can overlap the image edge without being clipped. The
+     white ring separates it cleanly from the photo. */
   .service-icon {
-    position: absolute; bottom: -22px; left: 1.5rem; width: 52px; height: 52px; border-radius: 14px;
+    position: relative; z-index: 2; width: 50px; height: 50px; border-radius: 13px;
     display: inline-flex; align-items: center; justify-content: center;
-    background: linear-gradient(180deg, #E11D38, #C8102E); color: #fff;
-    border: 1px solid rgb(255 255 255 / 0.2); box-shadow: 0 10px 24px -8px rgb(var(--rgb-orange) / 0.6); z-index: 2;
+    background: rgb(var(--rgb-orange)); color: #fff;
+    box-shadow: 0 0 0 4px #fff, 0 8px 18px -8px rgb(var(--rgb-orange) / 0.55);
+    transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
   }
+  .service-card:hover .service-icon { transform: translateY(-3px); }
 
   /* ════════ MEDIA / GALLERY TILE (photo on dark) ════════ */
   .part-card {
@@ -411,11 +414,11 @@
 
   /* ════════ NAV (dark glass pill — logo is built for dark) ════════ */
   .nav-pill {
-    position: relative; color: rgb(255 255 255 / 0.74); font-weight: 600; font-size: 0.9rem;
-    padding: 0.5rem 0.85rem; border-radius: 999px; transition: color 0.25s ease, background 0.25s ease;
+    position: relative; color: rgb(255 255 255 / 0.72); font-weight: 500; font-size: 0.9rem;
+    padding: 0.5rem 0.85rem; border-radius: 10px; transition: color 0.2s ease, background 0.2s ease;
   }
-  .nav-pill:hover { color: #fff; background: rgb(255 255 255 / 0.08); }
-  .nav-pill.active { color: #fff; font-weight: 700; background: linear-gradient(180deg, #E11D38 0%, #C8102E 100%); }
+  .nav-pill:hover { color: #fff; background: rgb(255 255 255 / 0.07); }
+  .nav-pill.active { color: #fff; font-weight: 600; background: rgb(255 255 255 / 0.1); }
 
   /* footer underline link */
   .nav-link { position: relative; color: rgb(var(--rgb-muted)); font-weight: 500; transition: color 0.2s ease; }

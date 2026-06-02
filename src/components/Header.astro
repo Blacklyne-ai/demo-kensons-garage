@@ -12,7 +12,7 @@ const isActive = (item: typeof nav[number]) =>
   <div class="container-mcp pt-4 md:pt-6">
     <div
       id="nav-shell"
-      class="flex items-center justify-between gap-3 pl-4 pr-3 md:pl-6 md:pr-3 py-2.5 rounded-pill transition-all duration-500"
+      class="flex items-center justify-between gap-3 pl-4 pr-3 md:pl-5 md:pr-3 py-2 rounded-[20px] transition-all duration-500"
       style="background: rgba(15,15,15,0.72); backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 32px -8px rgba(0,0,0,0.55), inset 0 1px 0 0 rgba(255,255,255,0.08);"
     >
       <!-- Logo (original Kensons Garage wordmark — built for dark) -->
@@ -48,16 +48,16 @@ const isActive = (item: typeof nav[number]) =>
           <span id="live-text">Checking hours…</span>
         </span>
 
-        <a href={telLandline} class="btn btn-ghost btn-sm hidden xl:inline-flex" aria-label={`Call our second line ${site.phoneLandline}`}>
-          <Icon name="Phone" size={14} strokeWidth={2.2} />
+        <a href={telLandline} class="hidden xl:inline-flex items-center gap-1.5 px-2 text-white/60 hover:text-white text-[0.82rem] font-medium font-mono transition-colors" aria-label={`Call our second line ${site.phoneLandline}`}>
+          <Icon name="Phone" size={13} strokeWidth={2.2} />
           {site.phoneLandline}
         </a>
         <a href={telMobile} class="btn btn-primary btn-sm hidden md:inline-flex" aria-label={`Call Kensons Garage ${site.phoneMobile}`}>
           <Icon name="Phone" size={14} strokeWidth={2.2} />
           {site.phoneMobile}
         </a>
-        <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm !px-3 hidden sm:inline-flex" aria-label="Message us on WhatsApp">
-          <Icon name="MessageCircle" size={16} strokeWidth={2.2} />
+        <a href={whatsappLink} target="_blank" rel="noopener" class="hidden sm:inline-flex items-center justify-center w-[38px] h-[38px] rounded-[11px] border border-white/15 bg-white/5 text-white transition-colors hover:bg-[#1FA968] hover:border-transparent" aria-label="Message us on WhatsApp">
+          <Icon name="MessageCircle" size={17} strokeWidth={2.2} />
         </a>
 
         <button id="menu-toggle" class="lg:hidden p-2.5 rounded-full transition" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
