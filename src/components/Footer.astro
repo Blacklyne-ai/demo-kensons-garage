@@ -1,0 +1,98 @@
+---
+import { site, telMobile, telLandline, mailLink, whatsappLink, legalNav } from '../data/site';
+import { services } from '../data/services';
+import { reviewsMeta } from '../data/reviews';
+import Icon from './Icon.astro';
+const year = new Date().getFullYear();
+
+const quickLinks = [
+  { href: '/', label: 'Home' },
+  { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/contact', label: 'Contact' },
+  { href: '/gallery#faq', label: "FAQ's" },
+];
+---
+
+<footer class="bg-navy-ink text-white/70 pt-20 pb-8 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-70 pointer-events-none" style="background: radial-gradient(circle at 88% 8%, rgba(200,16,46,0.10) 0%, transparent 45%), radial-gradient(circle at 5% 95%, rgba(201,169,97,0.12) 0%, transparent 45%);"></div>
+
+  <div class="container-mcp relative">
+    <div class="grid md:grid-cols-12 gap-10 pb-12 border-b border-white/10">
+      <!-- Brand -->
+      <div class="md:col-span-4">
+        <a href="/" class="inline-flex mb-5" aria-label="Kensons Garage — home">
+          <img src="/logo.png" alt="Kensons Garage" width="300" height="86" class="h-12 w-auto" />
+        </a>
+        <p class="text-sm text-white/55 leading-relaxed max-w-xs mb-4">
+          Kensons Garage is a South London based vehicle body repair specialist offering accident repairs, resprays, and cosmetic vehicle repairs.
+        </p>
+        <p class="tagline-art text-gold text-2xl mb-5">This is Art.</p>
+        <div class="flex items-center gap-2 text-sm mb-5">
+          <span class="stars">
+            {Array.from({ length: 5 }).map(() => (
+              <svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            ))}
+          </span>
+          <a href={reviewsMeta.url} target="_blank" rel="noopener" class="text-white/55 hover:text-white transition">{reviewsMeta.rating} · {reviewsMeta.count} Google reviews</a>
+        </div>
+        <div class="flex items-center gap-2.5">
+          <a href={site.social.instagram} target="_blank" rel="noopener" aria-label="Kensons Garage on Instagram" class="w-10 h-10 rounded-full inline-flex items-center justify-center border border-white/12 text-white/75 hover:text-white hover:border-orange transition" style="background: rgba(255,255,255,0.04);">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.06 1.8.25 2.23.42.56.21.96.47 1.38.9.43.42.69.82.9 1.38.17.43.36 1.06.42 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.06 1.17-.25 1.8-.42 2.23-.21.56-.47.96-.9 1.38-.42.43-.82.69-1.38.9-.43.17-1.06.36-2.23.42-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.06-1.8-.25-2.23-.42a3.7 3.7 0 01-1.38-.9 3.7 3.7 0 01-.9-1.38c-.17-.43-.36-1.06-.42-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.06-1.17.25-1.8.42-2.23.21-.56.47-.96.9-1.38.42-.43.82-.69 1.38-.9.43-.17 1.06-.36 2.23-.42C8.42 2.17 8.8 2.16 12 2.16zm0 1.62c-3.15 0-3.5.01-4.74.07-1.14.05-1.76.24-2.18.4-.55.22-.94.47-1.35.88-.41.41-.66.8-.88 1.35-.16.42-.35 1.04-.4 2.18-.06 1.24-.07 1.59-.07 4.74s.01 3.5.07 4.74c.05 1.14.24 1.76.4 2.18.22.55.47.94.88 1.35.41.41.8.66 1.35.88.42.16 1.04.35 2.18.4 1.24.06 1.59.07 4.74.07s3.5-.01 4.74-.07c1.14-.05 1.76-.24 2.18-.4.55-.22.94-.47 1.35-.88.41-.41.66-.8.88-1.35.16-.42.35-1.04.4-2.18.06-1.24.07-1.59.07-4.74s-.01-3.5-.07-4.74c-.05-1.14-.24-1.76-.4-2.18a3.64 3.64 0 00-.88-1.35 3.64 3.64 0 00-1.35-.88c-.42-.16-1.04-.35-2.18-.4-1.24-.06-1.59-.07-4.74-.07zm0 2.76a5.46 5.46 0 110 10.92 5.46 5.46 0 010-10.92zm0 9a3.54 3.54 0 100-7.08 3.54 3.54 0 000 7.08zm6.95-9.2a1.27 1.27 0 11-2.55 0 1.27 1.27 0 012.55 0z"/></svg>
+          </a>
+          <a href={site.social.tiktok} target="_blank" rel="noopener" aria-label="Kensons Garage on TikTok" class="w-10 h-10 rounded-full inline-flex items-center justify-center border border-white/12 text-white/75 hover:text-white hover:border-orange transition" style="background: rgba(255,255,255,0.04);">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.6 5.82A4.28 4.28 0 0115.5 3h-3.1v12.6a2.5 2.5 0 11-2.5-2.5c.27 0 .53.04.78.12V10.1a5.66 5.66 0 00-.78-.05A5.65 5.65 0 1015.5 15.6V9.34a7.36 7.36 0 004.3 1.38V7.6a4.28 4.28 0 01-3.2-1.78z"/></svg>
+          </a>
+          <a href={whatsappLink} target="_blank" rel="noopener" aria-label="WhatsApp Kensons Garage" class="w-10 h-10 rounded-full inline-flex items-center justify-center border border-white/12 text-white/75 hover:text-white hover:border-orange transition" style="background: rgba(255,255,255,0.04);">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.97L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.71 14.6c-.24.68-1.4 1.3-1.93 1.34-.49.04-.49.4-3.09-.65-2.61-1.05-4.25-3.7-4.38-3.87-.13-.17-1.05-1.39-1.05-2.66s.67-1.89.91-2.15c.24-.26.52-.32.69-.32h.5c.16 0 .38-.06.59.45.21.52.72 1.79.78 1.92.07.13.11.28.02.45-.09.17-.13.28-.26.43-.13.15-.27.34-.39.46-.13.13-.26.27-.11.53.15.26.66 1.09 1.42 1.76.98.88 1.81 1.15 2.07 1.28.26.13.41.11.56-.06.15-.17.65-.76.82-1.02.17-.26.34-.21.58-.13.24.09 1.5.71 1.76.84.26.13.43.19.49.3.06.11.06.62-.18 1.31z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Services -->
+      <div class="md:col-span-3">
+        <h3 class="text-white font-semibold mb-4 text-[0.7rem] tracking-[0.18em] uppercase font-mono">Our Services</h3>
+        <ul class="space-y-2.5 text-sm">
+          {services.map((s) => (<li><a href={s.href} class="text-white/55 hover:text-orange-bright transition">{s.title}</a></li>))}
+        </ul>
+      </div>
+
+      <!-- Quick links -->
+      <div class="md:col-span-2">
+        <h3 class="text-white font-semibold mb-4 text-[0.7rem] tracking-[0.18em] uppercase font-mono">Quick Links</h3>
+        <ul class="space-y-2.5 text-sm">
+          {quickLinks.map((i) => (<li><a href={i.href} class="text-white/55 hover:text-orange-bright transition">{i.label}</a></li>))}
+        </ul>
+      </div>
+
+      <!-- Visit -->
+      <div class="md:col-span-3">
+        <h3 class="text-white font-semibold mb-4 text-[0.7rem] tracking-[0.18em] uppercase font-mono">Contact Info</h3>
+        <address class="not-italic text-sm text-white/55 leading-relaxed mb-3">
+          {site.address.unit}, {site.address.street}<br />
+          {site.address.area}, {site.address.city}<br />
+          {site.address.postcode}
+        </address>
+        <ul class="space-y-2 text-sm mb-4">
+          <li class="flex items-center gap-2"><span class="text-white/40 text-xs w-14">Phone 1</span> <a href={telMobile} class="text-white hover:text-orange-bright transition font-medium font-mono">{site.phoneMobile}</a></li>
+          <li class="flex items-center gap-2"><span class="text-white/40 text-xs w-14">Phone 2</span> <a href={telLandline} class="text-white hover:text-orange-bright transition font-medium font-mono">{site.phoneLandline}</a></li>
+          <li class="flex items-center gap-2"><span class="text-white/40 text-xs w-14">Email</span> <a href={mailLink} class="text-white/55 hover:text-orange-bright transition break-all">{site.email}</a></li>
+        </ul>
+        <p class="text-sm text-white/55 leading-relaxed">
+          Mon–Fri · 9:00am–7:00pm<br />
+          Saturday · By appointment<br />
+          Sunday · Closed
+        </p>
+      </div>
+    </div>
+
+    <div class="pt-6 flex flex-col md:flex-row md:justify-between gap-3 text-xs text-white/45">
+      <p>© {year} {site.name}. All rights reserved.</p>
+      <div class="flex flex-wrap gap-5">
+        {legalNav.map((i) => (<a href={i.href} class="hover:text-orange-bright transition">{i.label}</a>))}
+        <span>Car Body Repair · Accident Repair · Resprays — Brixton, South London</span>
+      </div>
+    </div>
+  </div>
+</footer>

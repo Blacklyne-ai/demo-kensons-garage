@@ -1,0 +1,41 @@
+---
+import Icon from './Icon.astro';
+import { site, telMobile, telLandline, whatsappLink } from '../data/site';
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'Need a repair quote? Let’s make it disappear.',
+  text = 'Call us today or send photos of the damage for a fast, honest estimate. Precision work, honest pricing — no job too big or too small.',
+} = Astro.props;
+---
+<section class="section-navy py-20 md:py-24 relative overflow-hidden">
+  <div class="glow-orb" style="width: 420px; height: 420px; top: -120px; right: -80px; background: #C8102E; opacity: 0.18;"></div>
+  <div class="glow-orb" style="width: 380px; height: 380px; bottom: -140px; left: -90px; background: #C9A961; opacity: 0.22;"></div>
+  <div class="container-mcp relative">
+    <div class="max-w-3xl fade-in">
+      <span class="eyebrow eyebrow-gold mb-5">This is Art</span>
+      <h2 class="heading-lg text-white text-balance mb-5">{title}</h2>
+      <p class="text-lg text-white/70 leading-relaxed mb-8 max-w-2xl text-pretty">{text}</p>
+      <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+        <a href={telMobile} class="btn btn-primary btn-lg">
+          <Icon name="Phone" size={17} strokeWidth={2.3} />
+          {site.phoneMobile}
+        </a>
+        <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+          <Icon name="MessageCircle" size={18} strokeWidth={2.2} />
+          Send photos on WhatsApp
+        </a>
+        <a href="/contact" class="btn btn-light btn-lg">
+          Get a free quote
+          <Icon name="ArrowRight" size={16} strokeWidth={2.5} />
+        </a>
+      </div>
+      <p class="text-sm text-white/45 mt-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+        <span class="flex items-center gap-2"><Icon name="MapPin" size={15} strokeWidth={2} /> {site.address.unit}, {site.address.street}, {site.address.city} {site.address.postcode}</span>
+        <a href={telLandline} class="flex items-center gap-2 hover:text-white transition"><Icon name="Phone" size={15} strokeWidth={2} /> {site.phoneLandline}</a>
+      </p>
+    </div>
+  </div>
+</section>

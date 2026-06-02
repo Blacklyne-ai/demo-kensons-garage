@@ -1,0 +1,199 @@
+---
+import { nav, telMobile, telLandline, whatsappLink, site } from '../data/site';
+import Icon from './Icon.astro';
+const { current = '' } = Astro.props;
+
+const isActive = (item: typeof nav[number]) =>
+  current === item.href ||
+  (item.children && item.href !== '/' && current.startsWith(item.href));
+---
+
+<header id="site-header" class="fixed top-0 left-0 right-0 z-50">
+  <div class="container-mcp pt-4 md:pt-6">
+    <div
+      id="nav-shell"
+      class="flex items-center justify-between gap-3 pl-4 pr-3 md:pl-6 md:pr-3 py-2.5 rounded-pill transition-all duration-500"
+      style="background: rgba(15,15,15,0.72); backdrop-filter: blur(20px) saturate(170%); -webkit-backdrop-filter: blur(20px) saturate(170%); border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 1px 2px rgba(0,0,0,0.4), 0 8px 32px -8px rgba(0,0,0,0.55), inset 0 1px 0 0 rgba(255,255,255,0.08);"
+    >
+      <!-- Logo (original Kensons Garage wordmark — built for dark) -->
+      <a href="/" class="flex items-center flex-shrink-0" aria-label="Kensons Garage — home">
+        <img src="/logo.png" alt="Kensons Garage" width="300" height="86" class="h-9 md:h-10 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-0.5" aria-label="Primary">
+        {nav.map((item) =>
+          item.children ? (
+            <div class="nav-dd relative">
+              <a href={item.href} class={`nav-pill inline-flex items-center gap-1 ${isActive(item) ? 'active' : ''}`} aria-haspopup="true" aria-expanded="false">
+                {item.label}
+                <Icon name="ChevronDown" size={14} strokeWidth={2.4} class="nav-dd-chev" />
+              </a>
+              <div class="nav-dd-panel" role="menu">
+                {item.children.map((c) => (
+                  <a href={c.href} role="menuitem" class={`nav-dd-item ${current === c.href ? 'active' : ''}`}>{c.label}</a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={item.href} class={`nav-pill ${isActive(item) ? 'active' : ''}`}>{item.label}</a>
+          )
+        )}
+      </nav>
+
+      <!-- Right cluster -->
+      <div class="flex items-center gap-2">
+        <span id="live-status" class="hidden 2xl:inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.72rem] font-medium" style="background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.82);">
+          <span id="live-dot" class="status-dot status-dot-closed"></span>
+          <span id="live-text">Checking hours…</span>
+        </span>
+
+        <a href={telLandline} class="btn btn-ghost btn-sm hidden xl:inline-flex" aria-label={`Call our second line ${site.phoneLandline}`}>
+          <Icon name="Phone" size={14} strokeWidth={2.2} />
+          {site.phoneLandline}
+        </a>
+        <a href={telMobile} class="btn btn-primary btn-sm hidden md:inline-flex" aria-label={`Call Kensons Garage ${site.phoneMobile}`}>
+          <Icon name="Phone" size={14} strokeWidth={2.2} />
+          {site.phoneMobile}
+        </a>
+        <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm !px-3 hidden sm:inline-flex" aria-label="Message us on WhatsApp">
+          <Icon name="MessageCircle" size={16} strokeWidth={2.2} />
+        </a>
+
+        <button id="menu-toggle" class="lg:hidden p-2.5 rounded-full transition" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu (dark glass overlay) -->
+  <div id="mobile-menu" class="hidden lg:hidden mt-2 mx-4 rounded-3xl overflow-hidden" style="background: rgba(15,15,15,0.97); backdrop-filter: blur(22px); border: 1px solid rgba(255,255,255,0.10); box-shadow: 0 30px 60px -20px rgba(0,0,0,0.7);">
+    <nav class="flex flex-col p-4" aria-label="Mobile">
+      {nav.map((item) => (
+        <Fragment>
+          <a href={item.href} class="py-3 px-2 text-white/85 hover:text-white border-b border-white/10 font-semibold transition" style={current === item.href ? 'color:#E11D38' : ''}>{item.label}</a>
+          {item.children && (
+            <div class="flex flex-col pl-4 border-b border-white/10">
+              {item.children.filter((c) => c.href !== item.href).map((c) => (
+                <a href={c.href} class="py-2.5 px-2 text-sm text-white/55 hover:text-orange-bright transition" style={current === c.href ? 'color:#E11D38' : ''}>{c.label}</a>
+              ))}
+            </div>
+          )}
+        </Fragment>
+      ))}
+      <div class="grid grid-cols-2 gap-2 mt-4">
+        <a href={telMobile} class="btn btn-primary btn-sm">
+          <Icon name="Phone" size={14} strokeWidth={2.2} /> Phone 1
+        </a>
+        <a href={telLandline} class="btn btn-ghost btn-sm">
+          <Icon name="Phone" size={14} strokeWidth={2.2} /> Phone 2
+        </a>
+      </div>
+      <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-sm btn-block mt-2">
+        <Icon name="MessageCircle" size={16} strokeWidth={2.2} /> Send photos on WhatsApp
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .hamburger { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 22px; height: 22px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: #E11D38; border-radius: 2px; transition: transform 0.4s cubic-bezier(0.68,-0.55,0.27,1.55), opacity 0.25s ease; transform-origin: center; }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* Services dropdown — dark glass */
+  .nav-dd-panel {
+    position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(8px);
+    min-width: 280px; padding: 0.5rem; border-radius: 18px;
+    background: rgba(18,18,18,0.97); border: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: blur(22px) saturate(170%); -webkit-backdrop-filter: blur(22px) saturate(170%);
+    box-shadow: 0 20px 44px -16px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(255,255,255,0.06);
+    opacity: 0; visibility: hidden; transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 60;
+  }
+  .nav-dd:hover .nav-dd-panel,
+  .nav-dd:focus-within .nav-dd-panel { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  .nav-dd:hover .nav-dd-chev { transform: rotate(180deg); }
+  .nav-dd-item {
+    display: block; padding: 0.6rem 0.85rem; border-radius: 11px; font-size: 0.9rem; font-weight: 600;
+    color: rgba(255,255,255,0.72); transition: background 0.2s ease, color 0.2s ease;
+  }
+  .nav-dd-item:hover { background: rgba(200,16,46,0.16); color: #fff; }
+  .nav-dd-item.active { color: #E11D38; background: rgba(200,16,46,0.10); }
+  .nav-dd-chev { transition: transform 0.3s ease; }
+</style>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const shell = document.getElementById('nav-shell');
+  const burger = toggle?.querySelector('.hamburger');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = !menu?.classList.contains('hidden');
+    menu?.classList.toggle('hidden');
+    burger?.classList.toggle('open', !isOpen);
+    toggle?.setAttribute('aria-expanded', (!isOpen).toString());
+    toggle?.setAttribute('aria-label', isOpen ? 'Open menu' : 'Close menu');
+  });
+  menu?.querySelectorAll('a').forEach((a) =>
+    a.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      burger?.classList.remove('open');
+      toggle?.setAttribute('aria-expanded', 'false');
+    })
+  );
+
+  // Nav strengthen / shrink on scroll
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      if (shell) {
+        if (y > 30) {
+          shell.style.background = 'rgba(10,10,10,0.88)';
+          shell.style.transform = 'scale(0.985)';
+        } else {
+          shell.style.background = 'rgba(15,15,15,0.72)';
+          shell.style.transform = 'scale(1)';
+        }
+      }
+      ticking = false;
+    });
+  });
+
+  // Live open/closed status — Mon–Fri 09:00–19:00, Saturday by appointment,
+  // Sunday closed (per the original site). Styled CSS dots, no emoji.
+  function updateStatus() {
+    const dot = document.getElementById('live-dot');
+    const text = document.getElementById('live-text');
+    if (!dot || !text) return;
+    const now = new Date();
+    const day = now.getDay(); // 0 Sun … 6 Sat
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const OPEN = 9 * 60;     // 09:00
+    const CLOSE = 19 * 60;   // 19:00
+
+    let open = false;
+    let msg = '';
+    if (day === 0) {
+      msg = 'Closed · Opens Monday 9am';
+    } else if (day === 6) {
+      msg = 'Saturday · by appointment';
+    } else {
+      if (mins < OPEN) msg = 'Opens 9am today';
+      else if (mins < CLOSE) { open = true; msg = 'Open now · Closes 7pm'; }
+      else if (day === 5) msg = 'Closed · Opens Monday 9am';
+      else msg = 'Closed · Opens 9am tomorrow';
+    }
+    text.textContent = msg;
+    dot.className = open ? 'status-dot status-dot-open' : 'status-dot status-dot-closed';
+  }
+  updateStatus();
+  setInterval(updateStatus, 60000);
+</script>

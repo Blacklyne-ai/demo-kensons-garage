@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://demo-kensons-garage.pages.dev/sitemap-index.xml

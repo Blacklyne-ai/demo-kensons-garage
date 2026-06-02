@@ -1,0 +1,94 @@
+---
+import Icon from './Icon.astro';
+import { site, whatsappLink } from '../data/site';
+interface Props { title?: string; intro?: string; }
+const {
+  title = 'Get a Photo Estimate',
+  intro = 'Send us clear photos of the damage and we’ll get back to you with an estimate as soon as possible. No account, no sign-up — submitting opens your email app with the details filled in.',
+} = Astro.props;
+const serviceOptions = [
+  'Accident repair & restoration',
+  'Full & partial resprays',
+  'Insurance & claims work',
+  'Vehicle servicing & maintenance',
+  'Brakes, wheels & rims',
+  'Customisation & interiors',
+  'Not sure / something else',
+];
+---
+<div class="card !p-6 md:!p-8 fade-in">
+  <h3 class="heading-md text-ink mb-2">{title}</h3>
+  <p class="text-muted text-[0.95rem] leading-relaxed mb-6 text-pretty">{intro}</p>
+
+  <form id="quote-form" data-email={site.email} data-wa={site.phoneMobileDigits} class="space-y-4" novalidate>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="field-label" for="qf-name">Your name *</label>
+        <input class="field" id="qf-name" name="name" type="text" autocomplete="name" placeholder="Jane Smith" required />
+      </div>
+      <div>
+        <label class="field-label" for="qf-phone">Phone</label>
+        <input class="field" id="qf-phone" name="phone" type="tel" autocomplete="tel" placeholder="07…" />
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="field-label" for="qf-email">Email *</label>
+        <input class="field" id="qf-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required />
+      </div>
+      <div>
+        <label class="field-label" for="qf-vehicle">Car details (make, model, reg) *</label>
+        <input class="field" id="qf-vehicle" name="vehicle" type="text" placeholder="e.g. Ford S-Max, 2019, AB19 CDE" required />
+      </div>
+    </div>
+    <div>
+      <label class="field-label" for="qf-service">What do you need?</label>
+      <select class="field" id="qf-service" name="service">
+        {serviceOptions.map((s) => <option value={s}>{s}</option>)}
+      </select>
+    </div>
+    <div>
+      <label class="field-label" for="qf-message">Describe the damage or work *</label>
+      <textarea class="field" id="qf-message" name="message" rows="4" placeholder="e.g. Front-end accident damage, scratched bumper and a broken wing mirror" required></textarea>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3 pt-1">
+      <button type="submit" class="btn btn-primary btn-block">
+        <Icon name="Mail" size={16} strokeWidth={2.2} />
+        Send enquiry by email
+      </button>
+      <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <Icon name="Camera" size={17} strokeWidth={2.2} />
+        Send photos on WhatsApp
+      </a>
+    </div>
+    <p class="text-[0.78rem] text-muted-light flex items-start gap-1.5 pt-1">
+      <Icon name="Info" size={13} strokeWidth={2.2} class="mt-0.5 flex-shrink-0" />
+      <span>The fastest way to a quote is to send photos of the damage on WhatsApp. We never share your details — see our <a href="/privacy-policy" class="text-orange-deep underline underline-offset-2">Privacy Policy</a>.</span>
+    </p>
+  </form>
+</div>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement | null;
+  if (form) {
+    const email = form.dataset.email || '';
+    const wa = form.dataset.wa || '';
+    const collect = () => {
+      const g = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement | null)?.value.trim() || '';
+      return {
+        name: g('qf-name'), phone: g('qf-phone'), em: g('qf-email'),
+        vehicle: g('qf-vehicle'), service: g('qf-service'), message: g('qf-message'),
+      };
+    };
+    const body = (d: ReturnType<typeof collect>) =>
+      `Name: ${d.name}\nPhone: ${d.phone}\nEmail: ${d.em}\nCar details: ${d.vehicle}\nService: ${d.service}\n\n${d.message}`;
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) { form.reportValidity(); return; }
+      const d = collect();
+      const subject = `Quote request — ${d.vehicle || 'vehicle'} (${d.service})`;
+      window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body(d))}`;
+    });
+  }
+</script>

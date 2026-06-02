@@ -1,0 +1,63 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+interface Props { dark?: boolean; }
+const { dark = false } = Astro.props;
+---
+<div class={`rounded-[1.5rem] p-6 md:p-7 ${dark ? 'glass text-white' : 'card'}`} data-hours-card>
+  <div class="flex items-center justify-between mb-5">
+    <h3 class={`font-bold text-lg flex items-center gap-2.5 ${dark ? 'text-white' : 'text-ink'}`}>
+      <Icon name="Clock" size={20} strokeWidth={2.1} class={dark ? 'text-orange-bright' : 'text-orange-deep'} />
+      Opening Hours
+    </h3>
+    <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[0.72rem] font-semibold" style={dark ? 'background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);' : 'background:rgba(26,26,26,0.04);border:1px solid rgba(26,26,26,0.1);'}>
+      <span id="oh-dot" class="status-dot status-dot-closed"></span>
+      <span id="oh-text" class={dark ? 'text-white/85' : 'text-ink/80'}>Checking…</span>
+    </span>
+  </div>
+  <dl class="text-[0.95rem]">
+    {site.hours.map((h) => (
+      <div class={`flex items-center justify-between py-2.5 ${dark ? 'border-b border-white/10' : 'border-b border-line'} last:border-0`} data-day={h.day}>
+        <dt class={dark ? 'text-white/70' : 'text-muted'}>{h.day}</dt>
+        <dd class={`font-mono font-semibold ${h.open ? (dark ? 'text-white' : 'text-ink') : (dark ? 'text-white/45' : 'text-muted-light')}`}>
+          {h.open ? `${h.open} – ${h.close}` : (h.note ?? 'Closed')}
+        </dd>
+      </div>
+    ))}
+  </dl>
+</div>
+
+<script>
+  // Live open/closed — Mon–Fri 09:00–19:00. Saturday "by appointment",
+  // Sunday closed (per the original site; Saturday flagged for review).
+  function updateHours() {
+    const dot = document.getElementById('oh-dot');
+    const text = document.getElementById('oh-text');
+    if (!dot || !text) return;
+    const now = new Date();
+    const day = now.getDay(); // 0 Sun … 6 Sat
+    const mins = now.getHours() * 60 + now.getMinutes();
+    const OPEN = 9 * 60;       // 09:00
+    const CLOSE = 19 * 60;     // 19:00
+    let open = false, msg = '';
+    if (day === 0) msg = 'Closed today';
+    else if (day === 6) msg = 'By appointment';
+    else if (mins < OPEN) msg = 'Opens 9:00am';
+    else if (mins < CLOSE) { open = true; msg = 'Open now'; }
+    else msg = 'Closed now';
+    text.textContent = msg;
+    dot.className = open ? 'status-dot status-dot-open' : 'status-dot status-dot-closed';
+
+    const names = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    document.querySelectorAll('[data-hours-card] [data-day]').forEach((row) => {
+      const el = row as HTMLElement;
+      if (el.dataset.day === names[day]) {
+        el.style.fontWeight = '700';
+        const dd = el.querySelector('dd');
+        if (dd && open) (dd as HTMLElement).style.color = '#16A34A';
+      }
+    });
+  }
+  updateHours();
+  setInterval(updateHours, 60000);
+</script>

@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import ServiceCard from '../../components/ServiceCard.astro';
+import ProcessSteps from '../../components/ProcessSteps.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/services';
+import { processTitle, whyIntro, whyChooseUs } from '../../data/content';
+---
+
+<Layout
+  current="/services"
+  title="Our Services - Kensons Garage | Car Body Repair South London"
+  description="Accident repair, resprays, insurance work, servicing, brakes & wheels and customisation — family-run car body repair in Brixton, South London."
+>
+  <!-- ════════ HERO ════════ -->
+  <PageHero
+    eyebrow="Our Services"
+    title="Full-service body repair, under one arch."
+    subtitle="We offer a full range of vehicle body repair and refinishing services for private customers and insurance work."
+    crumb="Services"
+    image="/images/service-1.jpg"
+    primary={{ href: '/contact', label: 'Get a Free Quote' }}
+    secondary={{ href: '/gallery', label: 'See our work' }}
+  />
+
+  <!-- ════════ SERVICES GRID ════════ -->
+  <section class="py-24 md:py-32 section-snow">
+    <div class="container-mcp">
+      <SectionHeading
+        eyebrow="What We Do"
+        title="Everything your vehicle needs, under one arch."
+        intro="From accident repair and resprays to servicing, brakes and customisation — every job is handled with care, precision and attention to detail."
+      />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ 4-STEP PROCESS ════════ -->
+  <section class="py-24 md:py-32 bg-white">
+    <div class="container-mcp">
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="eyebrow eyebrow-center mb-5">How It Works</span>
+        <h2 class="heading-lg text-balance mt-1">{processTitle}</h2>
+        <p class="text-lg text-muted mt-4 text-pretty">From the first photo to picking up your fully restored vehicle — four simple, hassle-free steps.</p>
+      </div>
+      <ProcessSteps />
+      <div class="text-center mt-12 fade-in">
+        <a href="/contact" class="btn btn-primary btn-lg">
+          Get Your Free Quote Now
+          <Icon name="ArrowRight" size={16} strokeWidth={2.5} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ WHY CHOOSE US ════════ -->
+  <section class="section-navy py-24 md:py-32 relative overflow-hidden">
+    <div class="glow-orb" style="width: 440px; height: 440px; top: -150px; left: -110px; background: #C8102E; opacity: 0.15;"></div>
+    <div class="glow-orb" style="width: 380px; height: 380px; bottom: -140px; right: -90px; background: #C9A961; opacity: 0.16;"></div>
+    <div class="container-mcp relative">
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="eyebrow eyebrow-gold eyebrow-center mb-5">Why Choose Us</span>
+        <h2 class="heading-lg text-white text-balance mt-1">{whyIntro}</h2>
+        <p class="tagline-art text-gold text-3xl md:text-4xl mt-5">This is Art.</p>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {whyChooseUs.map((w, i) => (
+          <div class={`card-navy group fade-in stagger-${(i % 3) + 1}`}>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 tile-icon">
+              <Icon name={w.icon} size={24} strokeWidth={2} class="text-orange-bright" />
+            </div>
+            <h3 class="font-bold text-lg text-white mb-2 leading-snug">{w.title}</h3>
+            <p class="text-white/65 text-[0.93rem] leading-relaxed">{w.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CTA BAND ════════ -->
+  <CtaBand />
+</Layout>

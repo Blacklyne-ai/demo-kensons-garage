@@ -1,0 +1,287 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import ReviewsSection from '../components/ReviewsSection.astro';
+import MapBlock from '../components/MapBlock.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, telMobile, whatsappLink, trustSignals } from '../data/site';
+import { services } from '../data/services';
+import { processTitle, processSteps, trustListTitle, trustList, whyIntro, whyChooseUs, aboutTeaser, quickQuote } from '../data/content';
+
+const heroStats = [
+  { value: site.stats.completedRepairs, suffix: '+', label: 'Completed repairs' },
+  { value: site.stats.happyCustomersPct, suffix: '%', label: 'Happy customers' },
+  { value: site.stats.panelsResprayed, suffix: 'K+', label: 'Panels resprayed' },
+  { value: site.stats.yearsExperience, suffix: '+', label: 'Years of experience' },
+];
+const fmt = (n: number) => n.toLocaleString('en-GB');
+---
+
+<Layout
+  current="/"
+  title="Kensons Garage | Car Body Repair & Accident Repair Specialists South London"
+  description="Family-run car body repair specialists South London. Accident repair, resprays, insurance work. Call Sheldon 07950 428 012 for a free quote. This is Art."
+>
+  <!-- ════════ HERO ════════ -->
+  <section class="relative min-h-[100svh] flex flex-col overflow-hidden bg-navy-deep">
+    <img src="/images/service-1.jpg" alt="" class="absolute inset-0 w-full h-full object-cover" style="animation: kenburns 34s ease-in-out infinite alternate;" loading="eager" fetchpriority="high" />
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="absolute inset-0 hero-mesh opacity-70"></div>
+    <div class="glow-orb" style="width: 460px; height: 460px; top: 8%; left: -130px; background: #C8102E; opacity: 0.22;"></div>
+    <div class="glow-orb" style="width: 400px; height: 400px; bottom: 6%; right: -110px; background: #C9A961; opacity: 0.22;"></div>
+
+    <div class="relative z-10 flex-1 flex items-center pt-32 pb-12 md:pt-40 md:pb-20">
+      <div class="container-mcp w-full">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7">
+            <div class="flex flex-wrap items-center gap-2 mb-7 fade-in">
+              <span class="pill pill-dark pill-dot">Family-Run Body Repair Specialists · South London</span>
+            </div>
+            <h1 class="heading-xl text-white hero-text-shadow text-balance mb-3 fade-in stagger-1">
+              Car Body Repairs &amp; <span class="text-orange">Accident Repair</span> Specialists in South London
+            </h1>
+            <p class="tagline-art text-gold text-3xl md:text-4xl mb-6 fade-in stagger-2">This is Art.</p>
+            <p class="text-lg md:text-xl text-white/80 hero-text-shadow max-w-2xl leading-relaxed mb-8 text-pretty fade-in stagger-3">
+              Expert bodywork, dent repair, resprays and insurance repairs. Precision work. Honest pricing. Trusted local garage. No job too big or too small.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 mb-8 fade-in stagger-4">
+              <a href="/contact" class="btn btn-primary btn-lg">
+                Get Your Free Quote
+                <Icon name="ArrowRight" size={16} strokeWidth={2.5} />
+              </a>
+              <a href={telMobile} class="btn btn-glass btn-lg">
+                <Icon name="Phone" size={17} strokeWidth={2.3} />
+                Call {site.phoneMobile}
+              </a>
+              <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+                <Icon name="MessageCircle" size={18} strokeWidth={2.2} />
+                WhatsApp
+              </a>
+            </div>
+            <div class="flex flex-wrap gap-2.5 fade-in stagger-5">
+              {trustSignals.map((t) => (
+                <span class="pill pill-dark">
+                  <Icon name="Check" size={13} strokeWidth={3} class="text-orange-bright" />
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Floating before/after proof card -->
+          <div class="lg:col-span-5 fade-in stagger-3 hidden lg:block">
+            <div class="glass rounded-[1.75rem] p-4 text-white max-w-sm ml-auto">
+              <div class="flex items-center justify-between mb-3 px-1">
+                <span class="text-[0.62rem] uppercase tracking-[0.2em] text-gold font-mono">Real Kensons repair</span>
+                <span class="pill pill-dark !py-1 !px-2.5 !text-[0.62rem]">Accident</span>
+              </div>
+              <div class="rounded-2xl overflow-hidden mb-3">
+                <img src="/images/gallery-1.jpg" alt="Before and after accident repair of a Mercedes CLA at Kensons Garage" width="1040" height="700" class="w-full aspect-[3/2] object-cover" loading="eager" />
+              </div>
+              <div class="flex items-center justify-between px-1">
+                <span class="stars">
+                  {Array.from({ length: 5 }).map(() => (
+                    <svg width="15" height="15" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                  ))}
+                </span>
+                <span class="text-[0.8rem] text-white/70">Damage, made invisible.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero stat bar -->
+    <div class="relative z-10 pb-7 md:pb-9">
+      <div class="container-mcp">
+        <div class="glass rounded-3xl grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10 overflow-hidden fade-in">
+          {heroStats.map((s) => (
+            <div class="px-5 py-5 md:px-7 md:py-6">
+              <p class="text-2xl md:text-4xl font-black text-white stat-num">
+                <span data-count={s.value} data-suffix={s.suffix}>{fmt(s.value)}{s.suffix}</span>
+              </p>
+              <p class="text-[0.62rem] md:text-[0.7rem] text-white/65 uppercase tracking-widest mt-1.5 font-mono">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ AREAS SERVED STRIP ════════ -->
+  <section class="bg-white border-b border-line">
+    <div class="container-mcp py-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center">
+      <span class="text-[0.7rem] uppercase tracking-[0.2em] font-mono text-muted">Serving South London</span>
+      <span class="text-line" aria-hidden="true">·</span>
+      {site.areasServed.map((a, i) => (
+        <Fragment>
+          {i > 0 && <span class="text-line" aria-hidden="true">·</span>}
+          <span class="text-[0.82rem] font-semibold text-ink">{a}</span>
+        </Fragment>
+      ))}
+    </div>
+  </section>
+
+  <!-- ════════ 4-STEP PROCESS ════════ -->
+  <section class="py-24 md:py-32 bg-white">
+    <div class="container-mcp">
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="eyebrow eyebrow-center mb-5">How It Works</span>
+        <h2 class="heading-lg text-balance mt-1">{processTitle}</h2>
+        <p class="text-lg text-muted mt-4 text-pretty">From the first photo to picking up your fully restored vehicle — four simple, hassle-free steps.</p>
+      </div>
+      <ProcessSteps />
+      <div class="text-center mt-12 fade-in">
+        <a href="/contact" class="btn btn-primary btn-lg">
+          Get Your Free Quote Now
+          <Icon name="ArrowRight" size={16} strokeWidth={2.5} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ SERVICES ════════ -->
+  <section class="py-24 md:py-32 section-snow">
+    <div class="container-mcp">
+      <SectionHeading
+        eyebrow="Our Services"
+        title="Everything your vehicle needs, under one arch."
+        intro="From accident repair and resprays to servicing, brakes and customisation — handled with care, precision and attention to detail."
+        ctaHref="/services"
+        ctaLabel="All Services"
+      />
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+        {services.map((s, i) => <ServiceCard service={s} index={i} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TRUST YOUR CAR ════════ -->
+  <section class="py-24 md:py-32 bg-white overflow-hidden">
+    <div class="container-mcp">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="relative fade-in order-2 lg:order-1">
+          <div class="relative rounded-[2rem] overflow-hidden" style="background: radial-gradient(circle at 50% 25%, #242424, #0F0F0F); box-shadow: var(--shadow-lift);">
+            <div class="absolute inset-0 hero-mesh opacity-60"></div>
+            <img src="/images/mechanic.png" alt="A skilled Kensons Garage technician" width="900" height="900" class="relative w-full object-contain max-h-[460px]" loading="lazy" />
+          </div>
+          <div class="absolute -bottom-6 left-4 md:left-6 glass-light rounded-2xl px-6 py-5 max-w-[16rem]" style="box-shadow: var(--shadow-lift);">
+            <p class="tagline-art text-2xl" style="color:#8A6A24;">Skilled hands,<br/>honest pricing.</p>
+            <p class="text-[0.7rem] uppercase tracking-[0.16em] text-muted mt-2 font-mono">Family-run, by Sheldon &amp; the team</p>
+          </div>
+        </div>
+        <div class="fade-in stagger-1 order-1 lg:order-2">
+          <span class="eyebrow mb-5">Why Kensons</span>
+          <h2 class="heading-lg text-balance mt-1 mb-7">{trustListTitle}</h2>
+          <div class="grid sm:grid-cols-2 gap-x-6 gap-y-4">
+            {trustList.map((t) => (
+              <div class="flex items-center gap-3 text-ink">
+                <span class="w-9 h-9 rounded-xl bg-orange/8 text-orange-deep inline-flex items-center justify-center flex-shrink-0"><Icon name={t.icon} size={17} strokeWidth={2} /></span>
+                <span class="font-medium text-[0.95rem]">{t.label}</span>
+              </div>
+            ))}
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 mt-9">
+            <a href="/services" class="btn btn-navy">Explore our services<Icon name="ArrowRight" size={15} strokeWidth={2.5} /></a>
+            <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp">
+              <Icon name="MessageCircle" size={17} strokeWidth={2.2} /> Send photos for a quote
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ STATS COUNTER ════════ -->
+  <section class="section-navy py-20 md:py-28 relative overflow-hidden">
+    <div class="glow-orb" style="width: 440px; height: 440px; top: -150px; left: -100px; background: #C8102E; opacity: 0.14;"></div>
+    <div class="container-mcp relative">
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-in">
+        <span class="eyebrow eyebrow-light eyebrow-center mb-5">By the numbers</span>
+        <h2 class="heading-lg text-white text-balance mt-1">Trusted across South London.</h2>
+      </div>
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        {heroStats.map((s, i) => (
+          <div class={`card-navy text-center fade-in stagger-${i + 1}`}>
+            <p class="big-number text-white" style="font-size: clamp(2.4rem,6vw,3.6rem);"><span data-count={s.value} data-suffix={s.suffix}>{fmt(s.value)}{s.suffix}</span></p>
+            <p class="text-[0.66rem] md:text-[0.72rem] text-white/55 uppercase tracking-widest mt-2 font-mono">{s.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ WHY CHOOSE US ════════ -->
+  <section class="py-24 md:py-32 section-snow">
+    <div class="container-mcp">
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="eyebrow eyebrow-center mb-5">Why Choose Us</span>
+        <h2 class="heading-lg text-balance mt-1">{whyIntro}</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {whyChooseUs.map((w, i) => (
+          <div class={`card-feature group fade-in stagger-${(i % 3) + 1}`}>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background: linear-gradient(180deg, #242424, #0F0F0F);">
+              <Icon name={w.icon} size={24} strokeWidth={2} class="text-orange-bright" />
+            </div>
+            <h3 class="font-bold text-lg text-ink mb-2 leading-snug">{w.title}</h3>
+            <p class="text-muted text-[0.93rem] leading-relaxed">{w.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ ABOUT TEASER — "Craftsmanship You Can Trust" ════════ -->
+  <section class="py-24 md:py-32 bg-white overflow-hidden">
+    <div class="container-mcp">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="relative fade-in">
+          <div class="rounded-[2rem] overflow-hidden border border-line" style="box-shadow: var(--shadow-lift);">
+            <img src="/images/gallery-4.jpg" alt="A before-and-after vehicle body repair completed by Kensons Garage" width="1040" height="720" class="w-full aspect-[4/3] object-cover" loading="lazy" />
+          </div>
+          <div class="absolute -top-5 -right-3 md:right-6 hidden sm:block">
+            <span class="pill pill-gold">This is Art</span>
+          </div>
+        </div>
+        <div class="fade-in stagger-1">
+          <span class="eyebrow mb-5">About Us</span>
+          <h2 class="heading-lg text-balance mt-1 mb-6">{aboutTeaser.title}</h2>
+          {aboutTeaser.body.map((p) => <p class="text-lg text-muted leading-relaxed mb-5 text-pretty">{p}</p>)}
+          <a href="/about" class="arrow-link mt-2">Learn More About Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ REVIEWS ════════ -->
+  <ReviewsSection dark={true} />
+
+  <!-- ════════ QUICK QUOTE ════════ -->
+  <section class="py-20 md:py-24 section-snow">
+    <div class="container-mcp">
+      <div class="card-feature !p-8 md:!p-14 text-center max-w-3xl mx-auto fade-in">
+        <span class="eyebrow eyebrow-center mb-5">Free, no-obligation</span>
+        <h2 class="heading-lg text-balance mb-4">{quickQuote.title}</h2>
+        <p class="text-lg text-muted mb-8 max-w-xl mx-auto text-pretty">{quickQuote.body}</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href={telMobile} class="btn btn-primary btn-lg"><Icon name="Phone" size={17} strokeWidth={2.3} />{site.phoneMobile}</a>
+          <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg"><Icon name="Camera" size={17} strokeWidth={2.2} />Send photos for an estimate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FIND US ════════ -->
+  <section class="py-24 md:py-32 bg-white">
+    <div class="container-mcp">
+      <MapBlock />
+    </div>
+  </section>
+
+  <CtaBand />
+</Layout>

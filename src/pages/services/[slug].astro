@@ -1,0 +1,162 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Icon from '../../components/Icon.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, serviceBySlug } from '../../data/services';
+import { reviews, reviewBy } from '../../data/reviews';
+import { site, telMobile, whatsappLink } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+
+const { service } = Astro.props;
+
+// Optional featured review (only accident-repair sets one).
+const featured = service.reviewAuthor ? reviewBy(service.reviewAuthor) : undefined;
+
+// All other services for the "related" grid.
+const related = services.filter((s) => s.slug !== service.slug);
+---
+
+<Layout
+  current={service.href}
+  title={`${service.title} - Kensons Garage | Car Body Repair South London`}
+  description={service.metaDescription}
+>
+  <!-- ════════ HERO ════════ -->
+  <PageHero
+    eyebrow={service.eyebrow}
+    title={service.title}
+    subtitle={service.tagline}
+    crumb={service.title}
+    image={service.image}
+    primary={{ href: '/contact', label: service.cta }}
+    secondary={{ href: '/services', label: 'All services' }}
+  />
+
+  <!-- ════════ LEAD + WHAT'S INCLUDED ════════ -->
+  <section class="py-24 md:py-32 bg-white overflow-hidden">
+    <div class="container-mcp">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+        <div class="fade-in">
+          <span class="eyebrow mb-5">{service.eyebrow}</span>
+          <h2 class="heading-lg text-balance mt-1 mb-7">{service.title}</h2>
+          <p class="text-lg md:text-xl text-muted leading-relaxed text-pretty">{service.lead}</p>
+          <div class="flex flex-col sm:flex-row gap-3 mt-9">
+            <a href="/contact" class="btn btn-primary btn-lg">
+              {service.cta}
+              <Icon name="ArrowRight" size={16} strokeWidth={2.5} />
+            </a>
+            <a href={whatsappLink} target="_blank" rel="noopener" class="btn btn-whatsapp btn-lg">
+              <Icon name="MessageCircle" size={18} strokeWidth={2.2} />
+              Send photos for a quote
+            </a>
+          </div>
+        </div>
+
+        <div class="fade-in stagger-1">
+          <div class="card-feature !p-8 md:!p-10">
+            <span class="pill pill-gold mb-6">What's included</span>
+            <ul class="space-y-4">
+              {service.includes.map((item) => (
+                <li class="flex items-center gap-4">
+                  <span class="w-9 h-9 rounded-xl inline-flex items-center justify-center flex-shrink-0" style="background: linear-gradient(180deg, #E11D38, #C8102E); box-shadow: 0 8px 20px -8px rgb(200 16 46 / 0.55);">
+                    <Icon name="Check" size={16} strokeWidth={3} class="text-white" />
+                  </span>
+                  <span class="font-semibold text-ink text-[1.02rem]">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURES ════════ -->
+  <section class="py-24 md:py-32 section-snow">
+    <div class="container-mcp">
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="eyebrow eyebrow-center mb-5">What we do</span>
+        <h2 class="heading-lg text-balance mt-1">Precision, care and attention to detail.</h2>
+        <p class="text-lg text-muted mt-4 text-pretty">Every job is handled with the craftsmanship behind <span class="tagline-art text-gold">This is Art</span>.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5 md:gap-6">
+        {service.features.map((f, i) => (
+          <div class={`card-feature group fade-in stagger-${(i % 2) + 1}`}>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background: linear-gradient(180deg, #242424, #0F0F0F);">
+              <Icon name={f.icon} size={24} strokeWidth={2} class="text-orange-bright" />
+            </div>
+            <h3 class="font-bold text-lg text-ink mb-2 leading-snug">{f.title}</h3>
+            <p class="text-muted text-[0.95rem] leading-relaxed">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FEATURED REVIEW (accident-repair only) ════════ -->
+  {featured && (
+    <section class="section-navy py-24 md:py-32 relative overflow-hidden">
+      <div class="glow-orb" style="width: 440px; height: 440px; top: -150px; right: -100px; background: #C8102E; opacity: 0.14;"></div>
+      <div class="glow-orb" style="width: 380px; height: 380px; bottom: -140px; left: -90px; background: #C9A961; opacity: 0.16;"></div>
+      <div class="container-mcp relative">
+        <div class="max-w-3xl mx-auto text-center fade-in">
+          <div class="inline-flex w-14 h-14 rounded-2xl items-center justify-center mb-7" style="background: linear-gradient(180deg, #242424, #0F0F0F); border: 1px solid rgb(201 169 97 / 0.3);">
+            <Icon name="Quote" size={26} strokeWidth={2} class="text-gold" />
+          </div>
+          <span class="stars justify-center mb-6 flex">
+            {Array.from({ length: featured.rating }).map(() => (
+              <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+            ))}
+          </span>
+          <blockquote class="text-2xl md:text-[2rem] font-display font-semibold text-white leading-snug tracking-tight text-balance">
+            “{featured.quote}”
+          </blockquote>
+          <div class="mt-8 flex items-center justify-center gap-3">
+            <span class="w-11 h-11 rounded-full inline-flex items-center justify-center font-bold text-white flex-shrink-0" style="background: linear-gradient(180deg, #E11D38, #C8102E);">
+              {featured.name.charAt(0)}
+            </span>
+            <div class="text-left">
+              <p class="font-bold text-white leading-tight">{featured.name}</p>
+              <p class="text-[0.82rem] text-white/55">{featured.vehicle} · {featured.source} review</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ════════ RELATED SERVICES ════════ -->
+  <section class="py-24 md:py-32 bg-white">
+    <div class="container-mcp">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 fade-in">
+        <div class="max-w-2xl">
+          <span class="eyebrow mb-5">More from Kensons</span>
+          <h2 class="heading-lg text-balance mt-1">Everything your vehicle needs, under one arch.</h2>
+        </div>
+        <a href="/services" class="arrow-link flex-shrink-0">View all services</a>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {related.map((s, i) => (
+          <a href={s.href} class={`tile group fade-in stagger-${(i % 3) + 1}`}>
+            <span class="tile-icon tile-icon-orange">
+              <Icon name={s.icon} size={22} strokeWidth={2} />
+            </span>
+            <h3 class="font-bold text-lg text-ink leading-snug mt-1">{s.title}</h3>
+            <p class="text-muted text-[0.93rem] leading-relaxed">{s.tagline}</p>
+            <span class="arrow-link mt-2 text-[0.9rem]">
+              Learn more
+              <Icon name="ArrowRight" size={15} strokeWidth={2.5} />
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CTA BAND ════════ -->
+  <CtaBand title={`${service.title} — let's make it disappear.`} />
+</Layout>

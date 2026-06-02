@@ -1,0 +1,136 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, mailLink } from '../data/site';
+
+const a = site.address;
+---
+
+<Layout
+  current="/terms"
+  title="Terms of Service - Kensons Garage | Car Body Repair South London"
+  description="The terms on which Kensons Garage in Brixton provides body repair, resprays, servicing and insurance work, and uses this website."
+  noindex={true}
+>
+  <PageHero
+    eyebrow="Legal"
+    title="Terms of Service"
+    crumb="Terms of Service"
+  />
+
+  <section class="py-20 md:py-28 bg-white">
+    <div class="container-narrow">
+      <div class="legal-prose fade-in">
+        <p><strong>Last updated: June 2026</strong></p>
+
+        <p>
+          These Terms of Service set out the basis on which {site.name} provides its services and on which
+          you may use this website. By enquiring with us, booking work or using this site, you agree to
+          these terms. Please read them carefully.
+        </p>
+
+        <h2>Who we are</h2>
+        <p>
+          {site.name} is a family-run car body repair business based at {a.unit}, {a.street}, {a.area},
+          {a.city} {a.postcode}. You can contact us by email at <a href={mailLink}>{site.email}</a> or by
+          telephone on {site.phoneMobile} or {site.phoneSecondary}.
+        </p>
+
+        <h2>Services we provide</h2>
+        <p>
+          We provide vehicle body and collision repair services, including:
+        </p>
+        <ul>
+          <li>Body repair, dent and scratch repair, and accident damage restoration;</li>
+          <li>Full and partial resprays and refinishing;</li>
+          <li>Insurance and claims work;</li>
+          <li>Vehicle servicing and maintenance;</li>
+          <li>Brakes, wheels and rims;</li>
+          <li>Customisation and interiors.</li>
+        </ul>
+
+        <h2>Quotes and estimates</h2>
+        <p>
+          We provide <strong>free, no-obligation quotes</strong> so you know the cost and scope of repairs
+          before any work begins. Wherever possible we ask to see the damage — in person or from clear
+          photos — so the estimate is accurate. We provide a clear estimate before work begins and aim for
+          the final bill to match the quote. If, once work is under way, we discover additional damage or
+          work that materially affects the price, we will contact you and obtain your approval before
+          proceeding.
+        </p>
+
+        <h2>Bookings and your vehicle</h2>
+        <p>
+          Walk-ins are welcome, especially for minor damage that may be repaired the same day. For larger
+          repairs we will agree a convenient date so we have the right time and resources. While your
+          vehicle is with us we will take reasonable care of it. Please remove any valuables and personal
+          belongings before leaving your vehicle, as we cannot accept responsibility for items left inside.
+          Repair timescales are estimates given in good faith and may vary with the extent of the work or
+          the availability of parts.
+        </p>
+
+        <h2>Payment</h2>
+        <p>
+          We offer flexible payment options, including <strong>BACS transfers</strong>,
+          <strong>secure online payment links</strong> for convenience, and a <strong>card terminal</strong>
+          for in-person payments. Soon, we will also be offering <strong>Klarna</strong> for flexible
+          payment options. Payment is due on completion of the work unless we have agreed otherwise with
+          you in advance.
+        </p>
+
+        <h2>Workmanship guarantee</h2>
+        <p>
+          All our repairs come with a <strong>workmanship guarantee</strong>, giving you peace of mind that
+          the work is done to the highest standards. Please note this guarantee
+          <strong>does not cover new damage from accidents, wear and tear, or issues unrelated to the
+          original repair</strong>.
+        </p>
+
+        <h2>Insurance work</h2>
+        <p>
+          We work directly with insurance companies to help ensure a smooth claims process. Where your
+          repair is being handled as an insurance claim, the terms of your policy and your insurer's
+          authorisation will apply alongside these terms. You remain responsible for any excess, or for any
+          amounts your insurer does not cover, unless agreed otherwise.
+        </p>
+
+        <h2>Liability</h2>
+        <p>
+          We will carry out our work with reasonable care and skill. Nothing in these terms limits or
+          excludes our liability for death or personal injury caused by our negligence, for fraud, or for
+          any other liability that cannot lawfully be limited or excluded. Subject to that, we are not
+          liable for losses that are not a foreseeable result of our work, or for pre-existing faults, wear
+          and tear, or damage unrelated to the work we have carried out. Your statutory rights as a consumer
+          are not affected by these terms.
+        </p>
+
+        <h2>This website</h2>
+        <p>
+          The content, design, text, images and branding on this website — including the
+          <span class="tagline-art text-gold">This is Art</span> mark — are owned by or licensed to
+          {site.name} and are protected by intellectual property laws. You may view and use the site for
+          your own personal, non-commercial use. You may not copy, reproduce or republish any part of it
+          without our permission. We provide the site on an "as is" basis and may update or change its
+          content at any time.
+        </p>
+
+        <h2>Governing law</h2>
+        <p>
+          These terms are governed by the laws of <strong>England &amp; Wales</strong>, and any disputes
+          will be subject to the exclusive jurisdiction of the courts of England &amp; Wales.
+        </p>
+
+        <h2>How to contact us</h2>
+        <p>
+          If you have any questions about these Terms of Service, please contact us:
+        </p>
+        <ul>
+          <li><strong>{site.name}</strong></li>
+          <li>{a.unit}, {a.street}, {a.area}, {a.city} {a.postcode}</li>
+          <li>Email: <a href={mailLink}>{site.email}</a></li>
+          <li>Telephone: {site.phoneMobile} or {site.phoneSecondary}</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>

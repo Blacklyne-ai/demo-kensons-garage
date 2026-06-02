@@ -1,0 +1,109 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ReviewsSection from '../components/ReviewsSection.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site';
+import { aboutStory, whyIntro, whyChooseUs } from '../data/content';
+---
+
+<Layout
+  current="/about"
+  title="About Us - Kensons Garage | Car Body Repair South London"
+  description="Family-run car body repair specialists in a Brixton railway arch. Sheldon and the team make damage disappear with precision and pride. This is Art."
+>
+  <!-- ════════ HERO ════════ -->
+  <PageHero
+    eyebrow="About Kensons Garage"
+    title="Craftsmanship You Can Trust"
+    subtitle="A family-run body repair specialist in a Brixton railway arch — making damage disappear with precision, care and pride."
+    crumb="About"
+    image="/images/service-2.jpg"
+    primary={{ href: '/contact', label: 'Get a Free Quote' }}
+    secondary={{ href: '/services', label: 'Our Services' }}
+  />
+
+  <!-- ════════ STORY ════════ -->
+  <section class="py-24 md:py-32 bg-white overflow-hidden">
+    <div class="container-mcp">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <!-- Image — mechanic cut-out on dark radial card -->
+        <div class="relative fade-in order-2 lg:order-1">
+          <div class="relative rounded-[2rem] overflow-hidden" style="background: radial-gradient(circle at 50% 25%, #242424, #0F0F0F); box-shadow: var(--shadow-lift);">
+            <div class="absolute inset-0 hero-mesh opacity-60"></div>
+            <img src="/images/mechanic.png" alt="A skilled Kensons Garage technician" width="900" height="900" class="relative w-full object-contain max-h-[480px]" loading="lazy" />
+          </div>
+          <div class="absolute -bottom-6 left-4 md:left-6 glass-light rounded-2xl px-6 py-5 max-w-[16rem]" style="box-shadow: var(--shadow-lift);">
+            <p class="tagline-art text-2xl" style="color:#8A6A24;">A family business,<br/>built on pride.</p>
+            <p class="text-[0.7rem] uppercase tracking-[0.16em] text-muted mt-2 font-mono">Sheldon &amp; the team · Arch 2, Brixton</p>
+          </div>
+        </div>
+
+        <!-- Editorial copy -->
+        <div class="fade-in stagger-1 order-1 lg:order-2">
+          <span class="eyebrow mb-5">Our Story</span>
+          <h2 class="heading-lg text-balance mt-1 mb-4">Making damage disappear, one panel at a time.</h2>
+          <p class="tagline-art text-gold text-3xl md:text-4xl mb-7">This is Art.</p>
+          <div class="space-y-5">
+            {aboutStory.map((p) => (
+              <p class="text-lg text-muted leading-relaxed text-pretty">{p}</p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ "THIS IS ART" PHILOSOPHY + AREAS SERVED ════════ -->
+  <section class="section-navy py-24 md:py-32 relative overflow-hidden">
+    <div class="glow-orb" style="width: 460px; height: 460px; top: -130px; left: -110px; background: #C8102E; opacity: 0.14;"></div>
+    <div class="glow-orb" style="width: 400px; height: 400px; bottom: -120px; right: -100px; background: #C9A961; opacity: 0.16;"></div>
+    <div class="container-mcp relative">
+      <div class="max-w-3xl mx-auto text-center fade-in">
+        <span class="eyebrow eyebrow-gold eyebrow-center mb-6">Our Philosophy</span>
+        <p class="tagline-art text-gold mb-6" style="font-size: clamp(3rem, 9vw, 6rem); line-height: 1;">This is Art.</p>
+        <h2 class="heading-lg text-white text-balance mb-5">Proudly serving drivers across South London.</h2>
+        <p class="text-lg text-white/70 leading-relaxed text-pretty max-w-2xl mx-auto">
+          Every repair is treated as a craft — precision, care and attention to detail until the damage is simply gone. From our railway arch in Brixton, we look after private customers, insurers and fleets right across the south of the capital.
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-3 mt-12 fade-in stagger-1">
+        {site.areasServed.map((a) => (
+          <span class="pill pill-dark !text-[0.78rem] !py-2.5 !px-5">
+            <Icon name="MapPin" size={14} strokeWidth={2.2} class="text-gold" />
+            {a}
+          </span>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ WHY CHOOSE US ════════ -->
+  <section class="py-24 md:py-32 section-snow">
+    <div class="container-mcp">
+      <div class="text-center max-w-2xl mx-auto mb-14 fade-in">
+        <span class="eyebrow eyebrow-center mb-5">Why Choose Us</span>
+        <h2 class="heading-lg text-balance mt-1">{whyIntro}</h2>
+      </div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {whyChooseUs.map((w, i) => (
+          <div class={`card-feature group fade-in stagger-${(i % 3) + 1}`}>
+            <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background: linear-gradient(180deg, #242424, #0F0F0F);">
+              <Icon name={w.icon} size={24} strokeWidth={2} class="text-orange-bright" />
+            </div>
+            <h3 class="font-bold text-lg text-ink mb-2 leading-snug">{w.title}</h3>
+            <p class="text-muted text-[0.93rem] leading-relaxed">{w.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ REVIEWS ════════ -->
+  <ReviewsSection dark={true} />
+
+  <!-- ════════ CTA ════════ -->
+  <CtaBand />
+</Layout>
