@@ -40,8 +40,8 @@ export default {
         amber: 'rgb(var(--rgb-amber) / <alpha-value>)',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Archivo', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Rubik', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'sans-serif'],
+        display: ['Saira', 'Rubik', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', '"SF Mono"', 'monospace'],
       },
       borderRadius: {

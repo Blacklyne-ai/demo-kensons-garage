@@ -12,7 +12,7 @@ tagline) is preserved verbatim; the design is entirely new.
 - **Astro 5** — static build, **no SSR, no adapter** (outputs plain HTML to `/dist`).
 - **Tailwind CSS v3.4** via `@astrojs/tailwind` (v4 is intentionally avoided — it breaks Cloudflare Pages builds).
 - **@lucide/astro** for all icons. **Zero emojis.**
-- Fonts: Archivo (display), Inter (body), Cormorant Garamond italic ("This is Art" accents), JetBrains Mono (numerals).
+- Fonts: **Saira** (headings) + **Rubik** (body) — inherited verbatim from the original kensonsgarage.com (Elementor); JetBrains Mono (numerals); "This is Art" in Saira italic.
 
 ## Develop
 

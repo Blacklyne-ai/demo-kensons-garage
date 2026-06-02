@@ -54,8 +54,12 @@ fresh 2027 design. A few items need a human decision or a quick confirmation bef
 - **Reviews:** only the 3 real Google reviews (Niels Busink · Ford S-Max, Lana Price · Lexus NX,
   Oliver Munns · MG) are used, **verbatim**, with Sheldon named in Lana's and Oliver's quotes. The
   "Read all reviews on Google" link points to the Google search results for the business.
-- **"This is Art"** is threaded through the hero, footer, about page and CTAs as a gold Cormorant
-  Garamond accent (`.tagline-art .text-gold`).
+- **Typography matches the original site (operator feedback).** Headings use **Saira** and body uses
+  **Rubik** — the exact fonts the live kensonsgarage.com (Elementor) uses (primary/secondary = Saira,
+  text/accent = Rubik). "This is Art" is a gold **Saira italic** accent (`.tagline-art .text-gold`).
+  (An earlier draft used Archivo/Inter/Cormorant; replaced to honour the original CI.)
+- **Buttons flattened to a slim 2027 style** (operator feedback): single-colour fills, subtle shadow
+  and a 1px hover lift — no glossy multi-stop gradients, inset highlights, shimmer sweep or puffy padding.
 - **Google Maps** uses an address-query embed (no API key) for *Arch 2, 173 Ferndale Road, London
   SW9 8BA*. Coordinates in `site.ts` are approximate to the Ferndale Road railway arches.
 - **Schema.org:** `AutoBodyShop` + `AutoRepair` + `LocalBusiness`, including the 3 real reviews and an
